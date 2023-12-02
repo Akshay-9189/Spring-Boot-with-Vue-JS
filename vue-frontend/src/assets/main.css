@@ -1,0 +1,34 @@
+@import './base.css';
+@import 'bootstrap';
+
+.shadow-lg {
+  box-shadow: 0 0 15px rgb(0, 10, 3) !important;
+}
+
+.main {
+  min-height: calc(100vh - 56px);
+}
+
+.sub {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background: linear-gradient(to bottom right, #feac5e, #c779d0, #f66363);
+}
+
+.pad>div {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.table>:not(caption)>*>* {
+  background-color: transparent;
+}
+
+.nf {
+  background: linear-gradient(to bottom, #e85d6d, #985048);
+}
