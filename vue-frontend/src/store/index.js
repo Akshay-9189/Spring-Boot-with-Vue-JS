@@ -1,25 +1,50 @@
-import { createStore } from 'vuex'
+import { defineStore } from 'pinia'
+//import { createStore } from 'vuex'
 
-export const store = createStore({
-    state: {
+// export const store = createStore({
+//     state: {
+//         login: false
+//     },
+//     getters: {
+//         isLoggedIn: (state) => {
+//             if (localStorage.getItem('login')) {
+//                 store.commit('setLogIn')
+//             }
+//             return state.login ? true : false
+//         }
+//     },
+//     mutations: {
+//         setLogIn: (state) => {
+//             localStorage.setItem('login', true)
+//             state.login = true
+//         },
+//         setLogOut: (state) => {
+//             localStorage.removeItem('login')
+//             state.login = false
+//         }
+//     }
+// })
+
+export const useAuth = defineStore('Auth', {
+    state: () => ({
         login: false
-    },
+    }),
     getters: {
         isLoggedIn: (state) => {
             if (localStorage.getItem('login')) {
-                store.commit('setLogIn')
+                state.login = true
             }
             return state.login ? true : false
         }
     },
-    mutations: {
-        setLogIn: (state) => {
+    actions: {
+        setLogIn() {
             localStorage.setItem('login', true)
-            state.login = true
+            this.login = true
         },
-        setLogOut: (state) => {
+        setLogOut() {
             localStorage.removeItem('login')
-            state.login = false
+            this.login = false
         }
     }
 })

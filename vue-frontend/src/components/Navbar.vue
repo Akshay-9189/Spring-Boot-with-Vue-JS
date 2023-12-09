@@ -1,9 +1,3 @@
-<script setup>
-import { RouterLink } from 'vue-router'
-import { mapGetters } from 'vuex'
-import { store } from '../store'
-</script>
-
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" data-bs-theme="dark">
         <div class="container-fluid">
@@ -43,15 +37,28 @@ import { store } from '../store'
 </template>
 
 <script>
+
+import { RouterLink } from 'vue-router'
+//import { mapGetters } from 'vuex'
+import { useAuth } from '../store'
+import { storeToRefs } from 'pinia';
+
 export default {
     methods: {
         handleLogOut() {
-            store.commit('setLogOut')
+            //store.commit('setLogOut')
+            this.auth.setLogOut()
             this.$router.push('/signin')
         }
     },
-    computed: {
-        ...mapGetters(['isLoggedIn'])
+    // computed: {
+    //     ...mapGetters(['isLoggedIn'])
+    // }
+    setup() {
+        const auth = useAuth()
+        const { isLoggedIn } = storeToRefs(auth)
+
+        return { isLoggedIn, auth }
     }
 }
 </script>

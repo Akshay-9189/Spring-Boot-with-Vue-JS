@@ -28,7 +28,7 @@
 
 <script>
 import { signIn } from '../apis/index';
-import { store } from '../store';
+import { useAuth } from '../store';
 
 export default {
     data() {
@@ -40,13 +40,19 @@ export default {
     methods: {
         onSubmit() {
             signIn(this.email, this.password).then(resp => {
-                store.commit('setLogIn')
+                //store.commit('setLogIn')
+                this.auth.setLogIn()
                 this.$router.push("/")
             }).catch(err => window.alert(err.response.data))
         },
         handleReset() {
             this.email = '', this.password = ''
         }
+    },
+    setup() {
+        const auth = useAuth()
+
+        return { auth }
     }
 }
 </script>

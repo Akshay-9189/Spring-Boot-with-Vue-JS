@@ -77,7 +77,9 @@
 
 <script>
 import { getEmployee, saveEmployee, updateEmployee } from '../apis/index'
-import { mapGetters } from 'vuex'
+//import { mapGetters } from 'vuex'
+import { useAuth } from '../store'
+import { storeToRefs } from 'pinia'
 
 export default {
     data() {
@@ -118,8 +120,14 @@ export default {
         if (this.$route.params?.id)
             this.getEmployee(this.$route.params?.id)
     },
-    computed: {
-        ...mapGetters(['isLoggedIn'])
+    // computed: {
+    //     ...mapGetters(['isLoggedIn'])
+    // },
+    setup() {
+        const auth = useAuth()
+        const { isLoggedIn } = storeToRefs(auth)
+
+        return { isLoggedIn }
     }
 }
 </script>
